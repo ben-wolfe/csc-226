@@ -30,37 +30,25 @@ public class QuickSelect {
 
     public static int medianOfMedians(ArrayList<Integer> A, int k) {
 
+    	System.out.println("k: " + k);
+
     	int kthValue, pivot;
     	ArrayList<Integer> allMedians = new ArrayList<Integer>();
+    	ArrayList<Integer> subList = new ArrayList<Integer>();
 
-    	pivot = A.get(0);
+    	for(int index=0; index < A.size(); index++) {
+	
+    		subList.add(A.get(index));
 
-    	for(int index=0; index < A.size(); index = ++) {
-		
+    		if (subList.size() == 7) {
 
-    		if (index % 7 == 0) {
-    			
-    			ArrayList<Integer> subList = new ArrayList<Integer>(A.subList(index, index+7));
-    			allMedians.add(findMedian(subList));  
+    			allMedians.add(findMedian(subList));
+    			subList.clear();
 
-    		} else if (index == A.size() - (A.size() % 7)) {
-    			
-    			ArrayList<Integer> subList = new ArrayList<Integer>(A.subList(index, A.size()-1));
-    			allMedians.add(findMedian(subList));  
+    		} else if (index == A.size()-1 && subList.size() != 7) {
 
-    		}
-
-
-    		if (index == A.size() - (A.size() % 7)) {
-    			
-    			ArrayList<Integer> subList = new ArrayList<Integer>(A.subList(index, A.size()-1));
-    			allMedians.add(findMedian(subList));  
-
-    		} else if (index % 7 == 0) {
-    			
-    			ArrayList<Integer> subList = new ArrayList<Integer>(A.subList(index, index+7));
-    			allMedians.add(findMedian(subList));  
-
+				allMedians.add(findMedian(subList));
+    			subList.clear();
     		}
     	}
 
@@ -74,8 +62,6 @@ public class QuickSelect {
     		pivot = medianOfMedians(allMedians, allMedians.size()/2);
     	} 
 
-    	System.out.println("Pivot: " + pivot);
-
     	ArrayList<Integer> low = new ArrayList<Integer>();
     	ArrayList<Integer> high = new ArrayList<Integer>();
  
@@ -84,28 +70,20 @@ public class QuickSelect {
     		else if (num > pivot) high.add(num);
     	}
 
-    	System.out.println("Low: ");
-    	printLists(low);
-    	System.out.println();
-		
-		System.out.println("High: ");
-    	printLists(high);
-    	System.out.println();
 
-
+    	int highLength = high.size();
     	int lowLength = low.size();
-    	System.out.println(lowLength);
+    	System.out.println("Low size: " + lowLength + ", High size: " + highLength);
+
     	if (k < lowLength) {
-    		System.out.println("1");
-    		System.out.println(k);
     		return medianOfMedians(low, k);
+    	
     	} else if (k == lowLength+1) {
-    		System.out.println("2");
     		return pivot;
+    	
     	} else {
-    		System.out.println("3");
     		return medianOfMedians(high, k-lowLength-1);
-    	}
+    	}                       
     }
 
     public static int findMedian(ArrayList<Integer> nums) {
@@ -142,6 +120,6 @@ public class QuickSelect {
     public static void main(String[] args) {
         int[] A = {3, 1, 5, 7, 9, 10, 11, 13, 15, 22, 90, 83, 65, 33, 0, 2, 1, 1, 1, 1, 1};
        //System.out.println("The kth smallest value is " + QuickSelect(A, (A.length+1)/2));
-        System.out.println("The pivot is " + QuickSelect(A, 10));
+        System.out.println("The pivot is " + QuickSelect(A, 5));
     }
 }
