@@ -146,9 +146,9 @@ public class QuickSelect {
     }
     
     public static void main(String[] args) {
-    	int[] A = {10, 35, 12, 243};
+    	int[] A = {1, 24, 3, 70};
 
-        int kthElement = 2;
+        int kthElement = 1;
        //System.out.println("The kth smallest value is " + QuickSelect(A, (A.length+1)/2));
         System.out.println("The "+kthElement+"th smallest element is " + QuickSelect(A, kthElement));
     }
